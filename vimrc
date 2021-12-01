@@ -36,3 +36,19 @@ set foldmethod=syntax " 设置语法折叠
 set foldcolumn=0 " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为 1
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
+" Set cursor shape and color
+if &term =~ "xterm"
+    " INSERT mode
+    let &t_SI = "\<Esc>[6 q"
+    " REPLACE mode
+    let &t_SR = "\<Esc>[3 q"
+    " NORMAL mode
+    let &t_EI = "\<Esc>[2 q"
+endif
+if exists('$TMUX')
+    let &t_SI .= "\e[6 q"
+    let &t_SR .= "\e[3 q"
+    let &t_EI .= "\e[2 q"
+endif
+autocmd VimEnter * silent !echo -ne "\e[1 q"
+autocmd VimLeave * silent !echo -ne "\e[5 q"
