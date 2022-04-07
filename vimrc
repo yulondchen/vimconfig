@@ -52,3 +52,4 @@ if exists('$TMUX')
 endif
 autocmd VimEnter * silent !echo -ne "\e[1 q"
 autocmd VimLeave * silent !echo -ne "\e[5 q"
+nnoremap <BS> :nohl<return>
